@@ -1,1 +1,1 @@
-docker stop peoples-speech:latest
+docker stop peoples-speech:latest || true
