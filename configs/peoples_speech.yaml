@@ -1,2 +1,2 @@
 aws_region: us-east-2
-aws_ecr_registry_url: 939688055792.dkr.ecr.us-east-2.amazonaws.com/peoples-speech
+aws_ecr_registry_url: 939688055792.dkr.ecr.us-east-2.amazonaws.com
