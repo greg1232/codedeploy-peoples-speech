@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  react-webserver:
+    image: ${AWS_ECR_REGISTRY_URL}/peoples-speech-react-webserver
+    ports:
+      - "3000:3000"
+
+  data-manager-service:
+    image: ${AWS_ECR_REGISTRY_URL}/peoples-speech-data-manager-service
+    ports:
+      - "5001:5001"
+
+    volumes:
+      - type: bind
+        source: ${HOME}/.aws/credentials
+        target: /root/.aws/credentials
+        read_only: true
+    networks:
+      - my-bridge
+
+  trainer-service:
+    image: ${AWS_ECR_REGISTRY_URL}/peoples-speech-trainer-service
+    environment:
+      - PEOPLES_SPEECH_TARGET=${PEOPLES_SPEECH_TARGET}
+      - PEOPLES_SPEECH_CREDENTIALS_PATH=${HOME}/.aws/credentials
+    volumes:
+      - type: bind
+        source: ${HOME}/.aws/credentials
+        target: /root/.aws/credentials
+        read_only: true
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    ports:
+      - "5555:5555"
+    networks:
+      my-bridge:
+        aliases:
+          - trainer
+
+networks:
+  my-bridge:
+    name: custom_network

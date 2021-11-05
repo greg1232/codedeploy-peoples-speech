@@ -33,7 +33,9 @@ PASS=$(aws ecr get-login-password --region ${AWS_REGION})
 
 echo $PASS | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_URL}
 
-docker pull ${AWS_ECR_REGISTRY_URL}/peoples-speech:latest
+docker pull ${AWS_ECR_REGISTRY_URL}/peoples-speech-data-manager-service:latest
+docker pull ${AWS_ECR_REGISTRY_URL}/peoples-speech-react-webserver:latest
+docker pull ${AWS_ECR_REGISTRY_URL}/peoples-speech-trainer-service:latest
 
-docker run --rm -it -d -p 3000:3000 -p 5000:5000 -v $HOME/.aws/credentials:/root/.aws/credentials:ro -v /var/run/docker.sock:/var/run/docker.sock -e PEOPLES_SPEECH_CREDENTIALS_PATH="$HOME/.aws/credentials" --name peoples-speech ${AWS_ECR_REGISTRY_URL}/peoples-speech:latest
+PEOPLES_SPEECH_TARGET="$(uname -m)" docker-compose -f ./scripts/docker-compose.yml up
 
