@@ -3,7 +3,7 @@ services:
   react-webserver:
     image: ${AWS_ECR_REGISTRY_URL}/peoples-speech-react-webserver
     ports:
-      - "3000:3000"
+      - "80:3000"
 
   data-manager-service:
     image: ${AWS_ECR_REGISTRY_URL}/peoples-speech-data-manager-service
