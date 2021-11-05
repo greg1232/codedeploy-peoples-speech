@@ -37,5 +37,5 @@ docker pull ${AWS_ECR_REGISTRY_URL}/peoples-speech-data-manager-service:latest
 docker pull ${AWS_ECR_REGISTRY_URL}/peoples-speech-react-webserver:latest
 docker pull ${AWS_ECR_REGISTRY_URL}/peoples-speech-trainer-service:latest
 
-PEOPLES_SPEECH_TARGET="$(uname -m)" docker-compose -f $DEPLOYMENT_GROUP_ID/$DEPLOYMENT_ID/deployment-archive/scripts/docker-compose.yml up
+PEOPLES_SPEECH_TARGET="$(uname -m)" docker-compose -f deployment-root/$DEPLOYMENT_GROUP_ID/$DEPLOYMENT_ID/deployment-archive/scripts/docker-compose.yml up
 
