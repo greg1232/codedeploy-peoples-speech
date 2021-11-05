@@ -37,5 +37,7 @@ docker pull ${AWS_ECR_REGISTRY_URL}/peoples-speech-data-manager-service:latest
 docker pull ${AWS_ECR_REGISTRY_URL}/peoples-speech-react-webserver:latest
 docker pull ${AWS_ECR_REGISTRY_URL}/peoples-speech-trainer-service:latest
 
+echo "$(pwd)"
+
 PEOPLES_SPEECH_TARGET="$(uname -m)" docker-compose -f ./scripts/docker-compose.yml up
 
