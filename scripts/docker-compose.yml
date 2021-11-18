@@ -18,6 +18,21 @@ services:
     networks:
       - my-bridge
 
+  deploy-service:
+    image: ${AWS_ECR_REGISTRY_URL}/peoples-speech-deploy-service
+    ports:
+      - "5002:5002"
+
+    volumes:
+      - type: bind
+        source: ${HOME}/.aws
+        target: /root/.aws
+        read_only: true
+    networks:
+      my-bridge:
+        aliases:
+          - deploy
+
   trainer-service:
     image: ${AWS_ECR_REGISTRY_URL}/peoples-speech-trainer-service
     environment:
