@@ -1,3 +1,15 @@
-docker-compose -f deployment-root/$DEPLOYMENT_GROUP_ID/$DEPLOYMENT_ID/deployment-archive/scripts/docker-compose.yml down
+#!/bin/bash
+
+# Safely execute this bash script
+# e exit on first failure
+# u unset variables are errors
+# f disable globbing on *
+# pipefail | produces a failure code if any stage fails
+set -Eeuoxa pipefail
+
+# Get the directory of this script
+LOCAL_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+docker-compose -f $LOCAL_DIRECTORY/docker-compose.yml down
 docker system prune -f
 exit 0
